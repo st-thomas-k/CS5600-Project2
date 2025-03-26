@@ -1,3 +1,16 @@
+/**
+ * dbserver.c - A multi-threaded database server
+ * 
+ * This server implements a networked database with key-value storage.
+ * It uses one listener thread and four worker threads to handle client requests.
+ * 
+ * Main thread handling console commands
+ * Listener thread processing TCP connections
+ * Four worker threads handling database operations
+ * Work queue with thread-safe implementation
+ * Database table with proper locking mechanisms
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
