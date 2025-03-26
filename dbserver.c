@@ -33,24 +33,24 @@ void print_stats() {
 
 
 void* handle_keyboard() {
-	 char line[128];
+    char line[128];
 
-     while (1) {
-     	 fgets(line, sizeof(line), stdin);
-
+    while (1) {
+         fgets(line, sizeof(line), stdin);
          line[strcspn(line, "\n")] = '\0';
 
          if (strcmp(line, "quit") == 0) {
              atomic_store(&running, 0);
              pthread_cond_broadcast(&queue.cond);
              printf("\n=== Closing Server ===\n");
-         	 break;
+	     break;
          }
          else if (strcmp(line, "stats") == 0) {
              print_stats();
          }
-     }
-     return NULL;
+    }
+	
+    return NULL;
 }
 
 
