@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include "queue.h"
 
+
 void init_queue(queue_t *q) {
     q->head = NULL;
     q->tail = NULL;
@@ -10,8 +11,8 @@ void init_queue(queue_t *q) {
     pthread_cond_init(&q->cond, NULL);
 }
 
-void enqueue(queue_t *q, int fd) {
 
+void enqueue(queue_t *q, int fd) {
     work_t* work_item = malloc(sizeof(work_t));
     if (work_item == NULL) {
         perror("malloc failed\n");
@@ -35,7 +36,6 @@ void enqueue(queue_t *q, int fd) {
     pthread_cond_signal(&(q->cond));
     pthread_mutex_unlock(&(q->mutex));
 }
-
 
 
 void destroy_queue(queue_t *q) {
