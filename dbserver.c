@@ -184,10 +184,11 @@ void* listener(void* arg) {
 
         if (fd < 0) {
             // make sure listener thread isn't blocking other threads
-          	if (errno == EAGAIN || errno == EWOULDBLOCK) {
+            if (errno == EAGAIN || errno == EWOULDBLOCK) {
                 usleep(10000);
                 continue;
-          	}
+	    }
+		
             perror("accept failed");
             continue;
         }
@@ -225,13 +226,13 @@ int get_work(queue_t *q) {
     free(tmp);
     pthread_mutex_unlock(&(q->mutex));
 
-    return fd;
+	return fd;
 }
 
 
 void* worker() {
     while (running) {
-        int fd = get_work(&queue);
+    	int fd = get_work(&queue);
         if (fd == -1) {
             break;  // kill thread if there is no work
         }
@@ -261,13 +262,13 @@ int main(int argc, char* argv[]) {
 
     // listener thread
     if (pthread_create(&listener_thread, NULL, listener, &port) != 0) {
-      perror("could not create listener thread");
-      return 1;
+    	perror("could not create listener thread");
+    	return 1;
     }
 
     // four worker threads
     for (int i = 0; i < NUM_WORKERS; i++) {
-        if (pthread_create(&worker_thread[i], NULL, worker, NULL) != 0) {
+    	if (pthread_create(&worker_thread[i], NULL, worker, NULL) != 0) {
             perror("could not create worker thread");
             return 1;
         }
