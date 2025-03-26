@@ -1,3 +1,7 @@
+/**
+ * queue.c - functions needed to handle queue struct
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
