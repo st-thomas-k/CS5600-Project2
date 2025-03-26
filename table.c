@@ -1,3 +1,7 @@
+/**
+ * table.c - functions needed to handle table struct
+ */
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
